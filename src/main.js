@@ -37,34 +37,3 @@ function handleSubmit(e) {
 }
 
 document.forms[0].addEventListener("submit", handleSubmit);
-
-// fetch("http://localhost:3000/contacts", {
-//   method: 'POST',
-//   body: JSON.stringify({
-//     "firstName": "foo",
-//     "lastName": "bar",
-//     "email": "asd@gmail.com",
-//     "phone": "+871308701",
-//     "gender": "female",
-//     "nationality": "iranian"
-//   }),
-//   headers: {
-//     "Content-Type": "application/json"
-//   }
-// })
-// .then((res) => res.json())
-// .then(data => console.log(data))
-
-// fetch("http://localhost:3000/contacts/2", {
-//   method: 'DELETE',
-// })
-// .then((res) => res.json())
-// .then(data => console.log(data))
-
-// fetch("http://localhost:3000/contacts/2")
-// .then((res) => res.json())
-// .then(data => console.log(data))
-
-// fetch("http://localhost:3000/contacts")
-// .then((res) => res.json())
-// .then(data => console.log(data))

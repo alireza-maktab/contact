@@ -13,12 +13,14 @@ export default class Contact {
       "phone",
       "gender",
       "nationality",
+      "id",
     ];
     for (const [name, value] of formData) {
       if (validFieldNames.includes(name)) {
         this[name] = value;
       }
     }
+    this.id ??= 0;
     validFieldNames.forEach((propName) => {
       if (!this.hasOwnProperty(propName)) {
         this[propName] = null;
@@ -40,7 +42,9 @@ export default class Contact {
           <td>${this.gender}</td>
           <td>${this.nationality}</td>
           <td>
-            <button data-index="${index}" type="button" class="btn btn-danger delete-btn">Delete</button>
+            <button data-id="${
+              this.id
+            }" type="button" class="btn btn-danger delete-btn">Delete</button>
           </td>
         </tr>
       `;

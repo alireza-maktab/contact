@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch",
-    "build": "webpack --env production"
+    "build": "webpack --env production",
+    "server": "json-server data.json"
   },
   "repository": {
     "type": "git",

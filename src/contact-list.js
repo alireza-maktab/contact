@@ -1,18 +1,30 @@
+import { deleteContact, getContact, getContacts, postContact } from "./api";
+import Contact from "./contact";
+
 export default class ContactList {
   list = [];
 
   constructor() {
     this.tableElement = document.getElementById("contact-list");
+    getContacts().then((res) => {
+      this.list = res.map((c) => new Contact(Object.entries(c)));
+      this.refresh();
+    });
   }
 
   add(contact) {
-    this.list.push(contact);
-    this.refresh();
+    postContact(contact).then(() => {
+      this.list.push(contact);
+      this.refresh();
+    });
   }
 
-  remove(index) {
-    this.list.splice(index, 1);
-    this.refresh();
+  remove(id) {
+    deleteContact(id).then(() => {
+      const targetIndex = this.list.findIndex((i) => i.id === id);
+      this.list.splice(targetIndex, 1);
+      this.refresh();
+    });
   }
 
   refresh() {
@@ -34,15 +46,16 @@ export default class ContactList {
   }
 
   _setDeleteEventListeners() {
-    this.tableElement
-      .querySelectorAll(".delete-btn")
-      .forEach((btn) =>
-        btn.addEventListener("click", this._handleClickDelete.bind(this))
-      );
+    this.tableElement.querySelectorAll(".delete-btn").forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        this._handleClickDelete(e);
+      })
+    );
   }
 
   _handleClickDelete(event) {
-    const targetIndex = event.target.dataset.index;
-    this.remove(targetIndex);
+    event.preventDefault();
+    const targetId = event.target.dataset.id;
+    this.remove(targetId);
   }
 }
